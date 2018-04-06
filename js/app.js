@@ -1,7 +1,8 @@
-/*
- * Create a list that holds all of your cards
- */
+const deck = document.querySelector(".deck");
 
+const classes = Array.from(deck.getElementsByClassName("fa"));
+
+const list = document.querySelectorAll("li.card i");
 
 /*
  * Display the cards on the page
@@ -24,8 +25,16 @@ function shuffle(array) {
 
     return array;
 }
+console.log(classes)
+shuffle(classes);
 
+const len = classes.length;
 
+for (let i = 0; i < list.length; i++) {
+    list[i].className = classes[i%len].className;
+}
+
+console.log(classes)
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
