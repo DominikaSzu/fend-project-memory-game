@@ -2,16 +2,8 @@ const deck = document.querySelector(".deck");
 
 const classes = Array.from(deck.getElementsByClassName("fa"));
 
-const list = document.querySelectorAll("li.card i");
+const list = document.querySelectorAll(".card");
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -25,16 +17,21 @@ function shuffle(array) {
 
     return array;
 }
-console.log(classes)
+
 shuffle(classes);
 
-const len = classes.length;
-
-for (let i = 0; i < list.length; i++) {
-    list[i].className = classes[i%len].className;
+function displayCard () {
+    this.classList.add("open", "show"); 
+    clickedCards.push(this);
 }
 
-console.log(classes)
+const clickedCards = [];
+
+for (let i = 0; i < list.length; i++) {
+    list[i].addEventListener("click", displayCard); 
+}
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
