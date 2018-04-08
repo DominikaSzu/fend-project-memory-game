@@ -48,41 +48,52 @@ function displayCard() {
     addToOpenCardList(this);
 }
 
-// Add to open list
+// Add to open list and control the cards if there are 2 of them
 
 function addToOpenCardList(item) {
     openedCards.push(item);
+    if (openedCards.length == 2) {
     matchControl(openedCards);
+    }
 }
 
 // Control if cards match
 
 function matchControl(array) {
-    if (openedCards.length === 2 && openedCards[0].innerHTML === openedCards[1].innerHTML) {
+    if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
         match(openedCards);
-    } else if (openedCards.length === 2 && (openedCards[0].innerHTML !== openedCards[1].innerHTML)) {
+    } else if (openedCards[0].innerHTML !== openedCards[1].innerHTML) {
         noMatch(array);
-
     }
 }
 
 // Add classes when cards match
 
-function match(array) {
+function addingClasses(array) {
     array[0].classList.add("match");
     array[1].classList.add("match");
     openedCards = [];
+}
+
+function match(array) {
+    addingClasses(array);
     matchCards.push(array[0])
     matchCards.push(array[1]);
 }
 
 // Remove classes when cards don't match
 
-function noMatch(array) {
-    openedCards[0].classList.remove("open", "show");
-    openedCards[1].classList.remove("open", "show");
-
+function removingClasses(array) {
+    array[0].classList.remove("open");
+    array[0].classList.remove("show");
+    array[1].classList.remove("open"); 
+    array[1].classList.remove("show"); 
+    openedCards = []; 
 }
+
+function noMatch(array) {
+    setTimeout(function () {removingClasses(array)}, 1000);
+} 
 
 // Restart button
 
@@ -93,6 +104,15 @@ function restartGame(e) {
     }
     assignSymbolToCard(cards);
 }
+
+// Congratulations popup when user wins
+
+function () {
+    if (matchCards.length == 16) {
+        //do the pop up
+    }
+}
+
 
 restartBtn.addEventListener("click", restartGame);
 
