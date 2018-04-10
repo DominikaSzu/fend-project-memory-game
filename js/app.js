@@ -9,6 +9,7 @@ const starCounter = document.querySelector(".stars");
 const stars = starCounter.querySelectorAll("li");
 const restartBtn = document.querySelector(".restart");
 const len = openedCards.length;
+const playAgainBtn = document.querySelector(".playAgain");
 
 
 // Function that shuffles elements
@@ -29,29 +30,29 @@ function shuffle(array) {
 }
 
 // Assign symbol to card
-
+//
 window.onload = assignSymbolToCard(cards);
 
 function assignSymbolToCard(array) {
     let shuffledCards = shuffle(classes);
     for (let i = 0; i < shuffledCards.length; i++) {
-        cards[i].firstElementChild.classList.add("fa");
-        cards[i].firstElementChild.classList.add(shuffledCards[i]);
+        cards[i].classList.add("fa");
+        cards[i].classList.add(shuffledCards[i]);
     }
 }
 
-// Add display classes to clicked cards
+//// Add display classes to clicked cards
 
 function displayCard() {
     this.classList.toggle("open");
     this.classList.toggle("show");
-    addToOpenCardList(this);
-}
+    addToOpenCardList(this);  
+    }
 
 // Add to open list and control the cards if there are 2 of them
 
-function addToOpenCardList(item) {
-    openedCards.push(item);
+function addToOpenCardList(card) {
+    openedCards.push(card);
     if (openedCards.length == 2) {
     matchControl(openedCards);
     }
@@ -60,10 +61,10 @@ function addToOpenCardList(item) {
 // Control if cards match
 
 function matchControl(array) {
-    if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
-        match(openedCards);
-    } else if (openedCards[0].innerHTML !== openedCards[1].innerHTML) {
-        noMatch(array);
+    if (openedCards[0].className == openedCards[1].className) {
+        match(openedCards); 
+    } else if (openedCards[0].className != openedCards[1].className) {
+        noMatch(openedCards);
     }
 }
 
@@ -75,10 +76,13 @@ function addingClasses(array) {
     openedCards = [];
 }
 
+// Controls if two carts matches
+
 function match(array) {
     addingClasses(array);
     matchCards.push(array[0])
     matchCards.push(array[1]);
+    openedCards = [];
 }
 
 // Remove classes when cards don't match
@@ -91,6 +95,7 @@ function removingClasses(array) {
     openedCards = []; 
 }
 
+
 function noMatch(array) {
     setTimeout(function () {removingClasses(array)}, 1000);
 } 
@@ -99,23 +104,29 @@ function noMatch(array) {
 
 function restartGame(e) {
     for (let i = 0; i < cards.length; i++) {
-        cards[i].classList.remove("show", "open");
-        cards[i].firstElementChild.classList = "";
+        cards[i].classList = "card";
     }
     assignSymbolToCard(cards);
 }
 
 // Congratulations popup when user wins
 
-function () {
-    if (matchCards.length == 16) {
-        //do the pop up
-    }
-}
+//function congrats () {
+//    if (matchCards.length == 16) {
+//        //do the pop up
+//    }
+//}
 
+// Reseting the game with reset button
 
 restartBtn.addEventListener("click", restartGame);
+
+// Card click event listener
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", displayCard);
 };
+
+// Play again button on pop up window restarts the game
+
+playAgainBtn.addEventListener("click", restartGame);
