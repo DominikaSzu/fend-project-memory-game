@@ -74,8 +74,8 @@ function matchControl(array) {
 // Add classes when cards match
 
 function addingClasses(array) {
-    array[0].classList.add("match");
-    array[1].classList.add("match");
+    array[0].classList.toggle("match");
+    array[1].classList.toggle("match");
     openedCards = [];
 }
 
@@ -91,7 +91,7 @@ function match(array) {
 // Remove classes when cards don't match
 
 function removingClasses(array) {
-    array[0].classList.remove("open");
+    array[0].classList.toggle("open");
     array[0].classList.remove("show");
     array[1].classList.remove("open"); 
     array[1].classList.remove("show"); 
@@ -109,9 +109,10 @@ function restartGame(e) {
     for (let i = 0; i < cards.length; i++) {
         cards[i].classList = "card";
     }
+    matchCards = [];
+    window.focus();
+    modal.style.display = "none";  
     
-  //  popup.style.display = "none";  POP UP!
-
     assignSymbolToCard(cards);
     
   
@@ -121,15 +122,19 @@ function restartGame(e) {
 
 function congrats() {
     if (matchCards.length === 16) {
-        popup.style.display = "block";
+        modal.style.display = "block";
+        popup.focus();
     }
 }
+
+window.addEventListener("click", congrats)
+
 
 // Closing popup if user clicks anywhere else
 
 window.addEventListener("click", function(e) {
     if (e.target === modal) {
- //       modal.style.display = "none";
+        modal.style.display = "none";
     }
 })
 
