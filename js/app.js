@@ -12,8 +12,7 @@ const len = openedCards.length;
 const playAgainBtn = document.querySelector(".playAgain");
 const popup = document.querySelector(".popup");
 const modal = document.querySelector(".modal");
-
-
+const timer = document.querySelector(".timer");
 
 // Function that shuffles elements
 
@@ -137,6 +136,22 @@ window.addEventListener("click", function(e) {
         modal.style.display = "none";
     }
 })
+
+// Timer function from Stack Overflow https://stackoverflow.com/a/34748056
+
+let totalSeconds = 0;
+
+function timeCount () {
+    ++totalSeconds;
+    let hour = Math.floor(totalSeconds / 3600);
+    let minute = Math.floor((totalSeconds - hour*3600)/60);
+    let seconds = totalSeconds - (hour*3600 + minute*60);
+    
+    timer.innerHTML = hour + " : " + minute + " : " + seconds;    
+    
+}
+
+window.onload = setInterval(timeCount, 1000);
 
 
 // Reseting the game with reset button
