@@ -10,6 +10,9 @@ const stars = starCounter.querySelectorAll("li");
 const restartBtn = document.querySelector(".restart");
 const len = openedCards.length;
 const playAgainBtn = document.querySelector(".playAgain");
+const popup = document.querySelector(".popup");
+const modal = document.querySelector(".modal");
+
 
 
 // Function that shuffles elements
@@ -38,7 +41,7 @@ function assignSymbolToCard(array) {
     for (let i = 0; i < shuffledCards.length; i++) {
         cards[i].classList.add("fa");
         cards[i].classList.add(shuffledCards[i]);
-    }
+    } 
 }
 
 //// Add display classes to clicked cards
@@ -106,16 +109,30 @@ function restartGame(e) {
     for (let i = 0; i < cards.length; i++) {
         cards[i].classList = "card";
     }
+    
+  //  popup.style.display = "none";  POP UP!
+
     assignSymbolToCard(cards);
+    
+  
 }
 
 // Congratulations popup when user wins
 
-//function congrats () {
-//    if (matchCards.length == 16) {
-//        //do the pop up
-//    }
-//}
+function congrats() {
+    if (matchCards.length === 16) {
+        popup.style.display = "block";
+    }
+}
+
+// Closing popup if user clicks anywhere else
+
+window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+ //       modal.style.display = "none";
+    }
+})
+
 
 // Reseting the game with reset button
 
@@ -130,3 +147,7 @@ for (let i = 0; i < cards.length; i++) {
 // Play again button on pop up window restarts the game
 
 playAgainBtn.addEventListener("click", restartGame);
+
+// Event to listen for the end of the game
+
+window.addEventListener("click", congrats)
