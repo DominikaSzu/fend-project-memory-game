@@ -13,6 +13,8 @@ const playAgainBtn = document.querySelector(".playAgain");
 const popup = document.querySelector(".popup");
 const modal = document.querySelector(".modal");
 const timer = document.querySelector(".timer");
+const popupScoresInfo = document.querySelector(".scoresInfo");
+
 
 // Function that shuffles elements
 
@@ -123,10 +125,14 @@ function congrats() {
     if (matchCards.length === 16) {
         modal.style.display = "block";
         popup.focus();
+        let timeScore = totalSeconds / 60;
+        
+        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds and you have received XYZ ★ in the rating.";
     }
+       
 }
 
-window.addEventListener("click", congrats)
+window.addEventListener("click", congrats);
 
 
 // Closing popup if user clicks anywhere else
@@ -151,7 +157,8 @@ function timeCount () {
     
 }
 
-window.onload = setInterval(timeCount, 1000);
+window.setInterval(timeCount, 1000);
+let timeCounter = setInterval(timeCount, 1000);
 
 
 // Reseting the game with reset button
