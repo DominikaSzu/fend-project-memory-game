@@ -117,6 +117,7 @@ function restartGame(e) {
     modal.style.display = "none";  
     restartStars();
     moves = 0;
+    totalSeconds = 0;
     assignSymbolToCard(cards);   
   
 }
