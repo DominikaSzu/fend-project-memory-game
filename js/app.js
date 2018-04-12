@@ -7,6 +7,7 @@ let matchCards = [];
 let moves = 0;
 const starCounter = document.querySelector(".stars");
 const stars = starCounter.querySelectorAll("li");
+const starCollection = Array.from(stars);
 const restartBtn = document.querySelector(".restart");
 const len = openedCards.length;
 const playAgainBtn = document.querySelector(".playAgain");
@@ -113,10 +114,17 @@ function restartGame(e) {
     matchCards = [];
     window.focus();
     modal.style.display = "none";  
-    
-    assignSymbolToCard(cards);
-    
+    restartStars();
+    assignSymbolToCard(cards);   
   
+}
+
+// Star Reset Function
+
+function restartStars() {
+    for (let i= 0; i < starCollection.length; i++) {
+        starCollection[i].innerHTML = "<li><i class='fa fa-star'></i></li>"
+    }
 }
 
 // Move counter
@@ -125,7 +133,17 @@ for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", function () {
             moves += 1;
             console.log(moves)
-        })
+                    
+            if (moves <= 32) {
+            //it's ok :)
+            } else if (moves <=42 ) {
+            starCollection[2].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
+            } else if (moves <=52 ) {
+            starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";  
+            } else {
+            starCollection[0].innerHTML = "<li><i class='fa fa-star-o'></i></li>";   
+            }       
+    })        
 }
 
 // Congratulations popup when user wins
@@ -136,12 +154,16 @@ function congrats() {
         popup.focus();
         let timeScore = totalSeconds / 60;
         
-        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds and you have received XYZ ★ in the rating.";
+        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds and you have done " + moves + " moves during the game.";
     }
        
 }
 
 window.addEventListener("click", congrats);
+
+// Updating moves counter in real time
+
+
 
 
 // Closing popup if user clicks anywhere else
