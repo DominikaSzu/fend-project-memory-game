@@ -4,7 +4,7 @@ const deck = document.querySelector(".deck");
 let cards = document.querySelectorAll(".card");
 let openedCards = [];
 let matchCards = [];
-let movesCounter = 0;
+let moves = 0;
 const starCounter = document.querySelector(".stars");
 const stars = starCounter.querySelectorAll("li");
 const restartBtn = document.querySelector(".restart");
@@ -119,6 +119,15 @@ function restartGame(e) {
   
 }
 
+// Move counter
+
+for (let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener("click", function () {
+            moves += 1;
+            console.log(moves)
+        })
+}
+
 // Congratulations popup when user wins
 
 function congrats() {
@@ -158,8 +167,6 @@ function timeCount () {
 }
 
 window.setInterval(timeCount, 1000);
-let timeCounter = setInterval(timeCount, 1000);
-
 
 // Reseting the game with reset button
 
