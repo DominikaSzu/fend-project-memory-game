@@ -5,6 +5,7 @@ let cards = document.querySelectorAll(".card");
 let openedCards = [];
 let matchCards = [];
 let moves = 0;
+const movesNrPanel = document.querySelector(".moves");
 const starCounter = document.querySelector(".stars");
 const stars = starCounter.querySelectorAll("li");
 const starCollection = Array.from(stars);
@@ -115,6 +116,7 @@ function restartGame(e) {
     window.focus();
     modal.style.display = "none";  
     restartStars();
+    moves = 0;
     assignSymbolToCard(cards);   
   
 }
@@ -163,8 +165,11 @@ window.addEventListener("click", congrats);
 
 // Updating moves counter in real time
 
+function movesUpdate() {
+     movesNrPanel.innerHTML = moves;
+ }
 
-
+window.addEventListener("click", movesUpdate);
 
 // Closing popup if user clicks anywhere else
 
