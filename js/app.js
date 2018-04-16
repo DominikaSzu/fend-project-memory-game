@@ -156,7 +156,20 @@ function congrats() {
         popup.focus();
         let timeScore = totalSeconds / 60;
         
-        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds and you have done " + moves + " moves during the game.";
+        let starNr;
+        
+        if (moves <= 32) {
+            starNr = "★★★";
+            } else if (moves <=42 ) {
+            starNr = "★★";
+            } else if (moves <=52 ) {
+            starNr = "★"; 
+            } else {
+            starNr = "0 stars";   
+            }
+            
+        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds, you have done " + moves + " moves during the game and received " + starNr + " in the ranking!";
+    
     }
        
 }
