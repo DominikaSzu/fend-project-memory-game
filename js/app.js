@@ -103,7 +103,7 @@ function removingClasses(array) {
 
 
 function noMatch(array) {
-    setTimeout(function () {removingClasses(array)}, 1000);
+    setTimeout(function () {removingClasses(array)}, 500);
 } 
 
 // Restart button
