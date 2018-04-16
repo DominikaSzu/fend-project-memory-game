@@ -135,7 +135,6 @@ function restartStars() {
 for (let i = 0; i < cards.length; i++) {
         cards[i].addEventListener("click", function () {
             moves += 1;
-            console.log(moves)
                     
             if (moves <= 32) {
             //it's ok :)
