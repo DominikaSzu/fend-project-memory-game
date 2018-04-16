@@ -44,7 +44,7 @@ function assignSymbolToCard(array) {
     for (let i = 0; i < shuffledCards.length; i++) {
         cards[i].classList.add("fa");
         cards[i].classList.add(shuffledCards[i]);
-    } 
+    }
 }
 
 //// Add display classes to clicked cards
@@ -52,15 +52,15 @@ function assignSymbolToCard(array) {
 function displayCard() {
     this.classList.toggle("open");
     this.classList.toggle("show");
-    addToOpenCardList(this);  
-    }
+    addToOpenCardList(this);
+}
 
 // Add to open list and control the cards if there are 2 of them
 
 function addToOpenCardList(card) {
     openedCards.push(card);
     if (openedCards.length == 2) {
-    matchControl(openedCards);
+        matchControl(openedCards);
     }
 }
 
@@ -68,7 +68,7 @@ function addToOpenCardList(card) {
 
 function matchControl(array) {
     if (openedCards[0].className == openedCards[1].className) {
-        match(openedCards); 
+        match(openedCards);
     } else if (openedCards[0].className != openedCards[1].className) {
         noMatch(openedCards);
     }
@@ -96,15 +96,17 @@ function match(array) {
 function removingClasses(array) {
     array[0].classList.toggle("open");
     array[0].classList.remove("show");
-    array[1].classList.remove("open"); 
-    array[1].classList.remove("show"); 
-    openedCards = []; 
+    array[1].classList.remove("open");
+    array[1].classList.remove("show");
+    openedCards = [];
 }
 
 
 function noMatch(array) {
-    setTimeout(function () {removingClasses(array)}, 500);
-} 
+    setTimeout(function () {
+        removingClasses(array)
+    }, 500);
+}
 
 // Restart button
 
@@ -114,18 +116,18 @@ function restartGame(e) {
     }
     matchCards = [];
     window.focus();
-    modal.style.display = "none";  
+    modal.style.display = "none";
     restartStars();
     moves = 0;
     totalSeconds = 0;
-    assignSymbolToCard(cards);   
-  
+    assignSymbolToCard(cards);
+
 }
 
 // Star Reset Function
 
 function restartStars() {
-    for (let i= 0; i < starCollection.length; i++) {
+    for (let i = 0; i < starCollection.length; i++) {
         starCollection[i].innerHTML = "<li><i class='fa fa-star'></i></li>"
     }
 }
@@ -133,19 +135,19 @@ function restartStars() {
 // Move counter
 
 for (let i = 0; i < cards.length; i++) {
-        cards[i].addEventListener("click", function () {
-            moves += 1;
-                    
-            if (moves <= 32) {
+    cards[i].addEventListener("click", function () {
+        moves += 1;
+
+        if (moves <= 32) {
             //it's ok :)
-            } else if (moves <=42 ) {
+        } else if (moves <= 42) {
             starCollection[2].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
-            } else if (moves <=52 ) {
-            starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";  
-            } else {
-            starCollection[0].innerHTML = "<li><i class='fa fa-star-o'></i></li>";   
-            }       
-    })        
+        } else if (moves <= 52) {
+            starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
+        } else {
+            starCollection[0].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
+        }
+    })
 }
 
 // Congratulations popup when user wins
@@ -155,23 +157,25 @@ function congrats() {
         modal.style.display = "block";
         popup.focus();
         let timeScore = totalSeconds / 60;
-        
+
         let starNr;
-        
+
         if (moves <= 32) {
             starNr = "★★★";
-            } else if (moves <=42 ) {
+        } else if (moves <= 42) {
             starNr = "★★";
-            } else if (moves <=52 ) {
-            starNr = "★"; 
-            } else {
-            starNr = "0 stars";   
-            }
-            
+        } else if (moves <= 52) {
+            starNr = "★";
+        } else {
+            starNr = "0 stars";
+        }
+
         popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds, you have done " + moves + " moves during the game and received " + starNr + " in the ranking!";
+
+        window.clearInterval(intervalFunction);
     
     }
-       
+
 }
 
 window.addEventListener("click", congrats);
@@ -179,14 +183,14 @@ window.addEventListener("click", congrats);
 // Updating moves counter in real time
 
 function movesUpdate() {
-     movesNrPanel.innerHTML = moves;
- }
+    movesNrPanel.innerHTML = moves;
+}
 
 window.addEventListener("click", movesUpdate);
 
 // Closing popup if user clicks anywhere else
 
-window.addEventListener("click", function(e) {
+window.addEventListener("click", function (e) {
     if (e.target === modal) {
         modal.style.display = "none";
     }
@@ -196,17 +200,17 @@ window.addEventListener("click", function(e) {
 
 let totalSeconds = 0;
 
-function timeCount () {
+function timeCount() {
     ++totalSeconds;
     let hour = Math.floor(totalSeconds / 3600);
-    let minute = Math.floor((totalSeconds - hour*3600)/60);
-    let seconds = totalSeconds - (hour*3600 + minute*60);
-    
-    timer.innerHTML = hour + " : " + minute + " : " + seconds;    
-    
+    let minute = Math.floor((totalSeconds - hour * 3600) / 60);
+    let seconds = totalSeconds - (hour * 3600 + minute * 60);
+
+    timer.innerHTML = hour + " : " + minute + " : " + seconds;
+
 }
 
-window.setInterval(timeCount, 1000);
+let intervalFunction = window.setInterval(timeCount, 1000); 
 
 // Reseting the game with reset button
 
