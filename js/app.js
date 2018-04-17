@@ -114,12 +114,13 @@ function restartGame(e) {
     for (let i = 0; i < cards.length; i++) {
         cards[i].classList = "card";
     }
-    matchCards = [];
     window.focus();
     modal.style.display = "none";
     restartStars();
     moves = 0;
     totalSeconds = 0;
+    matchCards = [];
+    openedCards = [];
     assignSymbolToCard(cards);
 
 }
@@ -142,11 +143,9 @@ for (let i = 0; i < cards.length; i++) {
             //it's ok :)
         } else if (moves <= 42) {
             starCollection[2].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
-        } else if (moves <= 52) {
-            starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
         } else {
-            starCollection[0].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
-        }
+            starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
+        } 
     })
 }
 
