@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-* [Code Dependencies](#code-dependencies)
+* [Code-Dependencies](#Code-Dependencies)
 * [Rules](#rules)
 
-## Code Dependiencies
+## Code-Dependencies
 
 This application is built with the following code dependiencies:
 
