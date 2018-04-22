@@ -29,9 +29,11 @@ body {
     flex-direction: column;
 }
 
-h1 {
+
+header h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    text-align: center;
 }
 
 /*
@@ -40,16 +42,18 @@ h1 {
 
 .deck {
     width: 660px;
-    min-height: 680px;
+    height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
+    flex-direction: row;
+    justify-content: space-between; 
+    //   align-items: center;
+    //   margin: 0 0 3em;
+    margin: 0 auto;
 }
 
 .deck .card {
@@ -169,27 +173,21 @@ h1 {
 * Media queries
 */
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 700px) {
     .score-panel {
-        width: 550px;
+        width: 100%;
         font-size: 20px;
     }
 
     .deck {
-        width: 680px;
+        width: 100%;
+        height: auto;
         padding: 32px;
     }
 
     .deck .card {
-        height: 130px;
-        width: 130px;
-        padding: 15px;
+        min-height: 100px;
+        min-width: 100px;
+        margin: 10px;
     }
-}
-
-@media screen and (max-width: 600px) {
-    h1 {
-        font-size: 34px;
-    }
-
 }
