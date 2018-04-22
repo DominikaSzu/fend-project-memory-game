@@ -37,7 +37,7 @@ function shuffle(array) {
 }
 
 // Assign symbol to card
-//
+
 window.onload = assignSymbolToCard(cards);
 
 function assignSymbolToCard(array) {
@@ -48,7 +48,7 @@ function assignSymbolToCard(array) {
     }
 }
 
-//// Add display classes to clicked cards
+// Add display classes to clicked cards
 
 function displayCard() {
     this.classList.toggle("open");
@@ -61,8 +61,8 @@ function displayCard() {
 function addToOpenCardList(card) {
     openedCards.push(card);
     if (openedCards.length == 2) {
-        matchControl(openedCards);
         deck.classList.add("noClick");
+        matchControl(openedCards);
     }
 }
 
@@ -73,22 +73,21 @@ function matchControl(array) {
         match(openedCards);
     } else if (openedCards[0].className != openedCards[1].className) {
         noMatch(openedCards);
-    }  
+    }
 }
 
 // Add classes when cards match
 
 function addingClasses(array) {
-    deck.classList.remove("noClick");
     array[0].classList.toggle("match");
     array[1].classList.toggle("match");
     openedCards = [];
-   
 }
 
 // Controls if two carts matches
 
 function match(array) {
+    deck.classList.remove("noClick");
     addingClasses(array);
     matchCards.push(array[0])
     matchCards.push(array[1]);
@@ -145,19 +144,14 @@ for (let i = 0; i < cards.length; i++) {
         clicks += 1;
         moves = (clicks / 2).toFixed();
 
-        if (clicks <= 20) {
+        if (moves <= 19) {
             //it's ok :)
-        } else if (clicks <= 24) {
+        } else if (moves <= 25) {
             starCollection[2].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
         } else {
             starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
-        } 
-        
-            
-    if (openedCards === []) {
-        deck.className = "deck";
-    }
-        
+        }
+
     })
 }
 
@@ -171,25 +165,21 @@ function congrats() {
 
         let starNr;
 
-        if (moves <= 32) {
+        if (moves <= 19) {
             starNr = "★★★";
-        } else if (moves <= 42) {
+        } else if (moves <= 25) {
             starNr = "★★";
-        } else if (moves <= 52) {
-            starNr = "★";
         } else {
-            starNr = "0 stars";
+            starNr = "★";
         }
 
-        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds, you have done " + cliks + " moves during the game and received " + starNr + " in the ranking!";
+        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds, you have done " + moves + " moves during the game and received " + starNr + " in the ranking!";
 
         window.clearInterval(intervalFunction);
-    
+
     }
 
 }
-
-window.addEventListener("click", congrats);
 
 // Updating moves counter in real time
 
@@ -221,7 +211,7 @@ function timeCount() {
 
 }
 
-let intervalFunction = window.setInterval(timeCount, 1000); 
+let intervalFunction = window.setInterval(timeCount, 1000);
 
 // Reseting the game with reset button
 
