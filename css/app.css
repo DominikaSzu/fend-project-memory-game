@@ -90,6 +90,10 @@ header h1 {
     animation-duration: 0.5s;
 }
 
+.noClick {
+    pointer-events: none;
+}
+
 /*
  * Styles for the Score Panel
  */

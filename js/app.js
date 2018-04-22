@@ -4,6 +4,7 @@ const deck = document.querySelector(".deck");
 let cards = document.querySelectorAll(".card");
 let openedCards = [];
 let matchCards = [];
+let clicks = 0;
 let moves = 0;
 const movesNrPanel = document.querySelector(".moves");
 const starCounter = document.querySelector(".stars");
@@ -61,6 +62,7 @@ function addToOpenCardList(card) {
     openedCards.push(card);
     if (openedCards.length == 2) {
         matchControl(openedCards);
+        deck.classList.add("noClick");
     }
 }
 
@@ -71,15 +73,17 @@ function matchControl(array) {
         match(openedCards);
     } else if (openedCards[0].className != openedCards[1].className) {
         noMatch(openedCards);
-    }
+    }  
 }
 
 // Add classes when cards match
 
 function addingClasses(array) {
+    deck.classList.remove("noClick");
     array[0].classList.toggle("match");
     array[1].classList.toggle("match");
     openedCards = [];
+   
 }
 
 // Controls if two carts matches
@@ -88,7 +92,6 @@ function match(array) {
     addingClasses(array);
     matchCards.push(array[0])
     matchCards.push(array[1]);
-    openedCards = [];
 }
 
 // Remove classes when cards don't match
@@ -99,6 +102,7 @@ function removingClasses(array) {
     array[1].classList.remove("open");
     array[1].classList.remove("show");
     openedCards = [];
+    deck.classList.remove("noClick");
 }
 
 
@@ -122,6 +126,7 @@ function restartGame(e) {
     matchCards = [];
     openedCards = [];
     assignSymbolToCard(cards);
+    deck.classList.remove("noClick");
 
 }
 
@@ -137,15 +142,22 @@ function restartStars() {
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", function () {
-        moves += 1;
+        clicks += 1;
+        moves = (clicks / 2).toFixed();
 
-        if (moves <= 32) {
+        if (clicks <= 20) {
             //it's ok :)
-        } else if (moves <= 42) {
+        } else if (clicks <= 24) {
             starCollection[2].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
         } else {
             starCollection[1].innerHTML = "<li><i class='fa fa-star-o'></i></li>";
         } 
+        
+            
+    if (openedCards === []) {
+        deck.className = "deck";
+    }
+        
     })
 }
 
@@ -169,7 +181,7 @@ function congrats() {
             starNr = "0 stars";
         }
 
-        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds, you have done " + moves + " moves during the game and received " + starNr + " in the ranking!";
+        popupScoresInfo.textContent = "Yayy, you won! It took you " + totalSeconds + " seconds, you have done " + cliks + " moves during the game and received " + starNr + " in the ranking!";
 
         window.clearInterval(intervalFunction);
     
