@@ -70,7 +70,12 @@ function addToOpenCardList(card) {
 
 function matchControl(array) {
     if (openedCards[0].className == openedCards[1].className) {
+        if (openedCards[0] !== openedCards[1]) {
         match(openedCards);
+        } else {
+            deck.classList.remove("noClick");
+            openedCards = [];
+        }
     } else if (openedCards[0].className != openedCards[1].className) {
         noMatch(openedCards);
     }
