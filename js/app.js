@@ -120,6 +120,7 @@ function restartGame(e) {
     window.focus();
     modal.style.display = "none";
     restartStars();
+    clicks = 0;
     moves = 0;
     totalSeconds = 0;
     matchCards = [];
