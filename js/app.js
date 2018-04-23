@@ -118,7 +118,7 @@ function noMatch(array) {
 
 // Restart button
 
-function restartGame(e) {
+function restartGame() {
     for (let i = 0; i < cards.length; i++) {
         cards[i].classList = "card";
     }
