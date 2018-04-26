@@ -128,6 +128,8 @@ function restartGame() {
     clicks = 0;
     moves = 0;
     totalSeconds = 0;
+    clearInterval(intervalFunction);
+    intervalFunction = setInterval(timeCount, 1000);
     matchCards = [];
     openedCards = [];
     assignSymbolToCard(cards);
@@ -217,7 +219,7 @@ function timeCount() {
 
 }
 
-let intervalFunction = window.setInterval(timeCount, 1000);
+let intervalFunction = setInterval(timeCount, 1000);
 
 // Reseting the game with reset button
 
