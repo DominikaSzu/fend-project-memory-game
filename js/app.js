@@ -70,14 +70,17 @@ function addToOpenCardList(card) {
 
 function matchControl(array) {
     if (openedCards[0].className == openedCards[1].className) {
+
         if (openedCards[0] !== openedCards[1]) {
-        match(openedCards);
+            match(openedCards);
+            moves += 1;
         } else {
             deck.classList.remove("noClick");
             openedCards = [];
         }
     } else if (openedCards[0].className != openedCards[1].className) {
         noMatch(openedCards);
+        moves += 1;
     }
 }
 
@@ -149,9 +152,6 @@ function restartStars() {
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", function () {
-        clicks += 1;
-        moves = (clicks / 2).toFixed();
-
         if (moves <= 19) {
             //it's ok :)
         } else if (moves <= 25) {
