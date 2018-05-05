@@ -18,7 +18,6 @@ const modal = document.querySelector(".modal");
 const timer = document.querySelector(".timer");
 const popupScoresInfo = document.querySelector(".scoresInfo");
 
-
 // Function that shuffles elements
 
 function shuffle(array) {
@@ -97,7 +96,7 @@ function addingClasses(array) {
 function match(array) {
     deck.classList.remove("noClick");
     addingClasses(array);
-    matchCards.push(array[0])
+    matchCards.push(array[0]);
     matchCards.push(array[1]);
 }
 
@@ -115,7 +114,7 @@ function removingClasses(array) {
 
 function noMatch(array) {
     setTimeout(function () {
-        removingClasses(array)
+        removingClasses(array);
     }, 500);
 }
 
@@ -203,7 +202,7 @@ window.addEventListener("click", function (e) {
     if (e.target === modal) {
         modal.style.display = "none";
     }
-})
+});
 
 // Timer function from Stack Overflow https://stackoverflow.com/a/34748056
 
@@ -229,7 +228,7 @@ restartBtn.addEventListener("click", restartGame);
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", displayCard);
-};
+}
 
 // Play again button on pop up window restarts the game
 
@@ -237,4 +236,4 @@ playAgainBtn.addEventListener("click", restartGame);
 
 // Event to listen for the end of the game
 
-window.addEventListener("click", congrats)
+window.addEventListener("click", congrats);
